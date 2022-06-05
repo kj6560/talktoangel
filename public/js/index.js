@@ -1,6 +1,6 @@
 if (location.href.substr(0, 5) !== 'https') location.href = 'https' + location.href.substr(4, location.href.length - 4)
 
-const socket = io()
+const socket = io("ws://talktocounsel:3000")
 
 let producer = null
 
