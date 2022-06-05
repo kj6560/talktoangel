@@ -1,0 +1,51 @@
+Created table users_virsalink
+Created a route do_login 
+On successful login res is redirected to dashboard   (dashboard.html)
+added express-session to handle sessions
+
+use 
+    user_email : admin@virsalink.in
+    pasword:     admin123 
+to see the dashboard with user_name, user_email and user_type fields from session
+
+To Do:
+---------------------------
+a. Add form validation in login : pending
+b. add a template engine such as handle bars to send data to dashboard.html : done
+c. Handle unsuccessful login: pending
+d. Design dashboard : done
+
+date: 23/09/2020
+
+create conference room is working in dashboard.
+delete conference is working in dashboard.
+join conference has some issue                      : solved 
+created route for /export_participants and /edit_rooms.
+
+To Do:
+---------------------------
+previously pending issues
+
+e. route /conference is not working from dashboard. look for errors in browser console : solved 
+f. design edit conference room page.
+g. design /conference  route.
+h. logout is not working.
+
+date: 24/09/2020
+
+added video control open and close video only by admin 
+created socket communication between server and clients for video controls
+Added participant list
+addition of participant on join and removal of participant on close in participant list working
+added audio control mute and unmute audio only by admin 
+created socket communication between server and clients for audio controls
+added screen share control allow and disallow screen share of participant only by admin
+created socket communication between server and clients for screen share controls.
+
+date: 25/09/2020
+
+added automatic attendance update
+created socket communication for attendance update.
+added kickout option 
+created socket communication for kickout
+disabled all controls on user screen.

@@ -1,0 +1,318 @@
+<style>
+    html,
+    body {
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+    }
+
+    video {
+        max-width: 100%;
+        max-height: 100%;
+        width: 100%;
+        margin-bottom: -7px;
+    }
+
+    #participants {
+        position: absolute;
+        top: 0;
+        right: -100%;
+        transition: 0.3s;
+        max-width: 100%;
+        width: 350px;
+        height: 100%;
+    }
+
+    #participants.show {
+        right: 0%;
+    }
+
+    #chat {
+        position: absolute;
+        top: 0;
+        right: -100%;
+        transition: 0.3s;
+        max-width: 100%;
+        width: 350px;
+        height: 100%;
+    }
+
+    #chat.show {
+        right: 0%;
+    }
+</style>
+<div class="bg-dark d-flex flex-column h-100 w-100 p-4">
+    <div class="flex-grow-1">
+        <div class="row no-gutters h-100">
+            <div class="col-12 col-md p-1">
+                <div class="video-box">
+                    <video id="host" style="background-color: red"  autoplay></video>
+                </div>
+            </div>
+            {{!--  --}}
+            <div class="col-12 col-md">
+                <div class="row no-gutters">
+                    <div class="col-4 p-1">
+                        <div class="video-box">
+                            <video id='1' style="background-color: red" autoplay></video>
+                        </div>
+                    </div>
+                    <div class="col-4 p-1">
+                        <div class="video-box">
+                            <video id='2' style="background-color: red" autoplay></video>
+                        </div>
+                    </div>
+                    <div class="col-4 p-1">
+                        <div class="video-box">
+                            <video id='3' style="background-color: red" autoplay></video>
+                        </div>
+                    </div>
+                    <div class="col-4 p-1">
+                        <div class="video-box">
+                            <video id='4' style="background-color: red" autoplay></video>
+                        </div>
+                    </div>
+                    <div class="col-4 p-1">
+                        <div class="video-box">
+                            <video id='5' style="background-color: red" autoplay></video>
+                        </div>
+                    </div>
+                    <div class="col-4 p-1">
+                        <div class="video-box">
+                            <video '6' style="background-color: red" autoplay></video>
+                        </div>
+                    </div>
+                    <div class="col-4 p-1">
+                        <div class="video-box">
+                            <video '7' style="background-color: red" autoplay></video>
+                        </div>
+                    </div>
+                    <div class="col-4 p-1">
+                        <div class="video-box">
+                            <video id='8' style="background-color: red"></video>
+                        </div>
+                    </div>
+                    <div class="col-4 p-1">
+                        <div class="video-box">
+                            <video id='9' style="background-color: red" autoplay></video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="p-2 bg-white rounded d-flex">
+        <div class="flex-grow-1">
+            <button class="btn btn-danger">
+                Leave
+            </button>
+        </div>
+        {{!--  --}}
+        <div class="flex-grow-1 text-center">
+            <button class="btn btn-outline-dark mr-1">
+                <i class="fas fa-microphone"></i>
+                {{!-- off mic --}}
+                {{!-- <i class="fas fa-microphone-slash"></i> --}}
+            </button>
+            <button class="btn btn-outline-dark mr-1" onclick='rc.produce(RoomClient.mediaType.video, videoSelect.value)'>
+                <i class="fas fa-video"></i>
+                {{!-- off video --}}
+                {{!-- <i class="fas fa-video-slash"></i> --}}
+            </button>
+            <button class="btn btn-outline-dark">
+                <i class="fas fa-desktop"></i>
+            </button>
+        </div>
+        {{!--  --}}
+        <div class="flex-grow-1 text-right">
+            <button class="btn btn-outline-dark mr-2" data-toggle="chat">
+                <i class="fas fa-comments"></i>
+            </button>
+            <button class="btn btn-outline-dark" data-toggle="participants">
+                <i class="fas fa-user-friends"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+{{!-- toggle participants list by toglling "show" class --}}
+{{!-- show --}}
+<div id="participants" class="bg-white d-flex flex-column">
+    <div class="p-2 bg-primary d-flex justify-content-between">
+        <h5 class="m-0 text-white">Participants</h5>
+        <button class="close text-white" data-toggle="participants">&times;</button>
+    </div>
+    {{!-- to emplty list: document.getElementById('participants-list').innerHTML = '' --}}
+    <div id="participants-list" class="flex-grow-1 overflow-auto">
+        <div class="d-flex flex-wrap justify-content-between align-items-center p-2 border-bottom">
+            <label>Jibreel</label>
+            <div>
+                <button class="btn btn-sm btn-outline-dark mr-1">
+                    <i class="fas fa-microphone-slash"></i>
+                    {{!-- on mic --}}
+                    {{!-- <i class="fas fa-microphone"></i> --}}
+                </button>
+                <button class="btn btn-sm btn-outline-dark mr-1">
+                    <i class="fas fa-video-slash"></i>
+                    {{!-- on video --}}
+                    {{!-- <i class="fas fa-video"></i> --}}
+                </button>
+                <button class="btn btn-sm btn-outline-dark">
+                    <i class="fas fa-desktop"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="chat" class="bg-white d-flex flex-column">
+    <div class="p-2 bg-primary d-flex justify-content-between">
+        <h5 class="m-0 text-white">Chat</h5>
+        <button class="close text-white" data-toggle="chat">&times;</button>
+    </div>
+    {{!-- to emplty list: document.getElementById('participants-list').innerHTML = '' --}}
+    <div id="chat-messages" class="flex-grow-1 overflow-auto">
+        <div class="p-2 border-bottom">
+            <h6 class="mb-0 font-weight-bold">Jibreel</h6>
+            <small class="text-muted">this is text messages</small>
+        </div>
+    </div>
+    <div class="p-2 border-top">
+        <textarea type="text" class="form-control w-100 mb-2" rows="2" style="resize: none;"
+            placeholder="Type here..."></textarea>
+        <button class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
+        <button class="btn btn-primary"><i class="fas fa-paperclip"></i></button>
+    </div>
+</div>
+{{!-- <style>
+        .containers {
+            display: grid;
+            grid-gap: 5px;
+            grid-template-columns: repeat(auto-fit, 1fr);
+            grid-template-rows: repeat(auto-fit, 300px);
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .vid {
+            flex: 0 1 auto;
+            height: 400px;
+        }
+
+        .settings {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 2px 2px;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none
+        }
+    </style> --}}
+
+<div id="login">
+        
+    {{#if context.roomid  includeZero=true}}
+        Room:   <input id="roomidInput" value="{{context.roomid}}" type="text" />
+        <!--<button id="createRoom" onclick="createRoom(roomid.value)" label="createRoom">Create Room</button>-->
+        <br />
+       
+        {{else}}
+       Room:   <input id="roomidInput" placeholder="Enter Room Id" type="text" />
+        <!--<button id="createRoom" onclick="createRoom(roomid.value)" label="createRoom">Create Room</button>-->
+        <br />
+         {{/if}}
+         {{#if context.user_name  includeZero=true}}
+        User: <input id='nameInput' value="{{context.user_name}}" type="text" />
+        {{else}}
+        User: <input id='nameInput' placeholder="Enter Name" type="text" />
+         {{/if}}
+        <button id='joinButton' onclick="joinRoom(nameInput.value, roomidInput.value)">Join</button>
+    </div>
+<div id="control" class="hidden">
+        <button id='exitButton' class='hidden' onclick="rc.exit()">Exit</button>
+        <br/>
+        audio: <select id="audioSelect">
+        </select>
+        <br/>
+        video: <select id="videoSelect">
+        </select>
+        <br />
+        <button id='startAudioButton' class='hidden' onclick="rc.produce(RoomClient.mediaType.audio, audioSelect.value)" hidden>audio</button>
+        <button id='stopAudioButton' class='hidden' onclick="rc.closeProducer(RoomClient.mediaType.audio)" hidden>close
+            audio</button>
+        <button id='startVideoButton' class='hidden' onclick="rc.produce(RoomClient.mediaType.video, videoSelect.value)" hidden>video</button>
+        <button id='stopVideoButton' class='hidden' onclick="rc.closeProducer(RoomClient.mediaType.video)" hidden>close
+            video</button>
+        <button id='startScreenButton' class='hidden' onclick="rc.produce(RoomClient.mediaType.screen)" hidden>screen</button>
+        <button id='stopScreenButton' class='hidden' onclick="rc.closeProducer(RoomClient.mediaType.screen)" hidden>close
+            screen</button>
+        <br />
+    </div>
+
+<div id='participant_list'>
+    <h5>Participants</h5>
+
+</div>
+<hr>
+
+<div id='videoMedia' class='hidden'>
+        <h2>------local------</h2>
+        <div id="localMedia"></div>
+        <!--<video id="localVideo" autoplay inline class="vid"></video>-->
+        <!--<video id="localScreen" autoplay inline class="vid"></video>-->
+        <h2>-----remote-----</h2>
+        <div id="remoteVideos" class="container">
+        </div>
+
+        <div id="remoteAudios"></div>
+
+    </div>
+{{#contentFor "scripts"}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" type="text/javascript"></script>
+<script src="/mediasoupclient" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/EventEmitter/5.2.8/EventEmitter.min.js"></script>
+<script src="/roomclient" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.keep-ratio@0.1.4/dist/jquery.keep-ratio.min.js"></script>
+
+<script>
+    $(function () {
+        $('video').each(function () {
+            const $video = $(this);
+            $video.keepRatio({ ratio: 4 / 3, calculate: 'height' });
+        });
+    })
+</script>
+
+
+{{#if context.user_type  includeZero=true}}
+<script>
+    var user_type = "{{context.user_type}}";
+    var user_name = "{{context.user_name}}";
+</script>
+{{else}}
+<script>
+    var user_type = "user";
+</script>
+{{/if}}
+
+<script src="/index" type="text/javascript"></script>
+<script>
+    $(function () {
+        $('[data-toggle]').click(function () {
+            const $this = $(this)
+            panelId = $this.data('toggle')
+            $('#' + panelId).toggleClass('show')
+        })
+    })
+</script>
+{{/contentFor}}
