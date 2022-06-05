@@ -9,17 +9,17 @@ const config = require('./config')
 const path = require('path')
 const Room = require('./Room')
 const Peer = require('./Peer')
-var corsOptions = {
-  origin: 'https://talktocounsel.com',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
 const options = {
   key: fs.readFileSync(path.join(__dirname, config.sslKey), 'utf-8'),
   cert: fs.readFileSync(path.join(__dirname, config.sslCrt), 'utf-8')
 }
-app.use(cors(corsOptions));
 const httpsServer = https.createServer(options, app)
-const io = require('socket.io')(httpsServer)
+const io = require('socket.io')(httpsServer,{
+  cors: {
+    origin: "https://talktocounsel.com",
+    methods: ["GET", "POST"]
+  }
+})
 
 
 
