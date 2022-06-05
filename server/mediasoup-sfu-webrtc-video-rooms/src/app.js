@@ -2,21 +2,22 @@ const express = require('express')
 
 const app = express()
 const https = require('httpolyglot')
+var cors = require('cors')
 const fs = require('fs')
 const mediasoup = require('mediasoup')
 const config = require('./config')
 const path = require('path')
 const Room = require('./Room')
 const Peer = require('./Peer')
-
+var corsOptions = {
+  origin: 'https://talktocounsel.com',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
 const options = {
   key: fs.readFileSync(path.join(__dirname, config.sslKey), 'utf-8'),
   cert: fs.readFileSync(path.join(__dirname, config.sslCrt), 'utf-8')
 }
-app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://talktocounsel.com');
-  next();
-});
+app.use(cors(corsOptions));
 const httpsServer = https.createServer(options, app)
 const io = require('socket.io')(httpsServer)
 
