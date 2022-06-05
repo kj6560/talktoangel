@@ -36,7 +36,7 @@
                 </div>
             @endif
 
-            <div style="text-decoration-color:white">
+            <div style="background-color:white">
                 <h1>I will Look Pretty very soon... </h1>
             </div>
         </div>
