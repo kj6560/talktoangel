@@ -17,6 +17,14 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+        <script src="socket.io/socket.io.js"></script>
+        <script src="js/mediasoupclient.min.js"></script>
+        <script src="js/EventEmitter.min.js"></script>
+        <script src="https://kit.fontawesome.com/d2f1016e6f.js" crossorigin="anonymous"></script>
+        <script src="js/RoomClient.js"></script>
+
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <script src="js/bootstrap.bundle.min.js"></script>
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />
@@ -42,5 +50,6 @@
         @stack('modals')
 
         @livewireScripts
+        <script src="index.js"></script>
     </body>
 </html>
