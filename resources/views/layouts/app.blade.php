@@ -18,7 +18,7 @@
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
         <script src="socket.io/socket.io.js"></script>
-        <script src="js/mediasoupclient.min.js"></script>
+        <script src="{{ url('js/mediasoupclient.min.js')}}"></script>
         <script src="js/EventEmitter.min.js"></script>
         <script src="https://kit.fontawesome.com/d2f1016e6f.js" crossorigin="anonymous"></script>
         <script src="js/RoomClient.js"></script>
@@ -50,6 +50,6 @@
         @stack('modals')
 
         @livewireScripts
-        <script src="index.js"></script>
+        <script src="{{ url('js/index.js')}}"></script>
     </body>
 </html>
