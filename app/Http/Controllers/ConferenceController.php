@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class ConferenceController extends Controller
 {
     public function index(Request $request){
-        return view('testing');
+        return view('conference.testing');
     }
 }
