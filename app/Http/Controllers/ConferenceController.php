@@ -10,7 +10,4 @@ class ConferenceController extends Controller
         return view('conference.testing');
     }
 
-    public function mobile(Request $request){
-        return view('conference.testing');
-    }
 }
