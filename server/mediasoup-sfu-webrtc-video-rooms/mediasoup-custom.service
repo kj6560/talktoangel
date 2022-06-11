@@ -1,0 +1,7 @@
+ExecStart=/var/www/html/angeltalk/server/mediasoup-sfu-webrtc-video-rooms/src/app.js
+Restart=always
+User=nobody
+Group=nogroup
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=NODE_ENV=production
+WorkingDirectory=/var/www/html/angeltalk/server/mediasoup-sfu-webrtc-video-rooms
